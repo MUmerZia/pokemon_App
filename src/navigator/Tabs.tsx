@@ -3,6 +3,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Navigator} from './Navigator';
 import {SearchScreens} from '../screens/SearchScreens';
 import Icon from 'react-native-vector-icons/Ionicons';
+import FavoriteScreen from '../screens/FavoriteScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -30,6 +31,16 @@ export const Tabs = () => {
       <Tab.Screen
         name="HomeScreen"
         component={Navigator}
+        options={{
+          tabBarLabel: 'Listado',
+          tabBarIcon: ({color}) => (
+            <Icon name="list-outline" color={color} size={25} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="FavoriteScreen"
+        component={FavoriteScreen}
         options={{
           tabBarLabel: 'Listado',
           tabBarIcon: ({color}) => (

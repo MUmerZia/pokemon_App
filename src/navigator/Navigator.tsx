@@ -3,6 +3,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {HomeScreen} from '../screens/HomeScreen';
 import {PokemonScreen} from '../screens/PokemonScreen';
 import {SinglePokemon} from '../interfaces/pokemonInterfaces';
+import FavoriteScreen from '../screens/FavoriteScreen';
 
 //* Recibir argumentos en los props
 export type RootStackParams = {
@@ -23,6 +24,7 @@ export const Navigator = () => {
       }}>
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
       <Stack.Screen name="PokemonScreen" component={PokemonScreen} />
+      <Stack.Screen name="FavoriteScreen" component={FavoriteScreen} />
     </Stack.Navigator>
   );
 };
