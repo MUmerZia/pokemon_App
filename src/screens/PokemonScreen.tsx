@@ -41,7 +41,6 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
     } else {
       dispatch(addToFav(singlePokemon))
     }
-    // setPokemonFavourateList(singlePokemon)
   }
 
 

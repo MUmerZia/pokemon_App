@@ -18,10 +18,10 @@ export default function FavoriteScreen() {
       <ScrollView>
         {
           fav_list.favourateList == [] ? null :
-            fav_list.favourateList.map((item, index) => {
+            fav_list.favourateList.slice(0).reverse().map((item, index) => {
               // console.log('item: ', item);
               return (
-                <PokemonFavCard pokemon={item} />
+                <PokemonFavCard pokemon={item} key={index} />
               )
             })
         }
