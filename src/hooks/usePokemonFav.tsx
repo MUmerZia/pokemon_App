@@ -6,39 +6,25 @@ import {
     SinglePokemon,
 } from '../interfaces/pokemonInterfaces';
 import AsyncStorage from '@react-native-community/async-storage'
+import { useSelector } from 'react-redux';
 
-export const usePokemonFav = () => {
-    const [isLoading, setIsLoading] = useState(true);
-
-    const [pokemonFavList, sePokemonFav] = useState([]);
-
-    useEffect(() => {
-        getFavList()
-    }, []);
-
-
-    const getFavList = async () => {
-        let data = await AsyncStorage.getItem('fav_list')
-        console.log('GetFavList--->>', data);
-        sePokemonFav(data)
+export const usePokemonFav = (id: string) => {
+    // console.log('id: ', id);
+    const fav_list = useSelector((state: any) => state.favourate);
+    let isFavrorite;
+    if (fav_list.favourateList.length == 0) {
+        isFavrorite = false
+    } else {
+        fav_list.favourateList.filter((item) => {
+            if (item.id == id) {
+                isFavrorite = true
+            }
+        })
     }
-
-    const setPokemonFavourateList = (pokemonObj: Result[]) => {
-        // console.log('Set Func----> ', pokemonObj);
-        // AsyncStorage.setItem('fav_list', JSON.stringify(pokemonObj))
-        const existingData = pokemonFavList ? JSON.parse(pokemonFavList) : {};
-        console.log('existingData: ', existingData);
-        let newData = { ...existingData, ...pokemonObj }
-        console.log('newData: ', newData);
-
-        AsyncStorage.setItem("fav_list", JSON.stringify(newData))
-    };
-
 
 
 
     return {
-        setPokemonFavourateList,
-        pokemonFavList,
+        isFavrorite,
     };
 };

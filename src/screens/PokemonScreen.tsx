@@ -17,7 +17,7 @@ import { PokemonDetail } from '../components/PokemonDetail';
 import FavoriteScreen from './FavoriteScreen';
 import { usePokemonFav } from '../hooks/usePokemonFav';
 import { useDispatch } from 'react-redux';
-import addToFavSlice, { addToFav } from '../store/favourate';
+import { addToFav, removeToFav } from '../store/favourate';
 
 //* Con el argumento de tipo podemos recibir los argumentos que se envian desde el componente Navigator
 interface Props extends StackScreenProps<RootStackParams, 'PokemonScreen'> { }
@@ -33,12 +33,17 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
 
   //* Use custom pokemon hook
   const { isLoading, pokemon } = usePokemon(id);
-  // const { setPokemonFavourateList } = usePokemonFav();
+  const { isFavrorite } = usePokemonFav(id);
 
   const favourateFunc = () => {
-    dispatch(addToFav(singlePokemon))
+    if (isFavrorite == true) {
+      dispatch(removeToFav(id))
+    } else {
+      dispatch(addToFav(singlePokemon))
+    }
     // setPokemonFavourateList(singlePokemon)
   }
+
 
   return (
     <View style={{ flex: 1 }}>
@@ -46,38 +51,21 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
 
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 22 }}>
 
-          <TouchableOpacity
-            activeOpacity={0.8}
-            // style={{...styles.backButton, top: top + 5}}
-            onPress={() => navigation.pop()}>
-            <Icon name="arrow-back-outline" color="white" size={35} />
-          </TouchableOpacity>
+          <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.pop()}><Icon name="arrow-back-outline" color="white" size={35} /></TouchableOpacity>
 
-          <TouchableOpacity
-            activeOpacity={0.8}
-            // style={{...styles.backButton, top: top + 5}}
-            onPress={() => favourateFunc()}>
-            <Icon name="heart-outline" color="white" size={35} />
+          <TouchableOpacity activeOpacity={0.8} onPress={() => favourateFunc()}>
+            <Icon name={isFavrorite == true ? "heart-sharp" : "heart-outline"} color="white" size={35} />
           </TouchableOpacity>
 
         </View>
-        <Text style={{ ...styles.pokemonName, top: top + 40 }}>
-          {name + '\n'} #{id}
-        </Text>
-        <Image
-          source={require('../assets/pokebola-blanca.png')}
-          style={styles.pokeBall}
-        />
+        <Text style={{ ...styles.pokemonName, top: top + 40 }}>{name + '\n'} #{id}</Text>
+        <Image source={require('../assets/pokebola-blanca.png')} style={styles.pokeBall} />
         <FadeInImage uri={picture} style={styles.pokemonImage} />
       </View>
       {/* Detalles y Loading */}
       {isLoading ? (
-        <View style={styles.loadingIndicator}>
-          <ActivityIndicator color={color} size={50} />
-        </View>
-      ) : (
-        <PokemonDetail pokemon={pokemon} />
-      )}
+        <View style={styles.loadingIndicator}><ActivityIndicator color={color} size={50} /></View>
+      ) : (<PokemonDetail pokemon={pokemon} />)}
     </View>
   );
 };

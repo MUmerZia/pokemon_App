@@ -15,7 +15,7 @@ const persistConfig = {
 }
 
 const reducer = combineReducers({
-    favourate:addToFavSlice,
+    favourate:addToFavSlice, 
 });
 const persistedReducer = persistReducer(persistConfig, reducer)
 
