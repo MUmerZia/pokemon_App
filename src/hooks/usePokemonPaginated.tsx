@@ -1,5 +1,5 @@
-import {useEffect, useRef, useState} from 'react';
-import {pokemonApi} from '../api/pokemonApi';
+import { useEffect, useRef, useState } from 'react';
+import { pokemonApi } from '../api/pokemonApi';
 import {
   PokemonPaginatedResponse,
   SinglePokemon,
@@ -28,7 +28,7 @@ export const usePokemonPaginated = () => {
   };
 
   const mapPokemonList = (pokemonList: Result[]) => {
-    const newPokemonList: SinglePokemon[] = pokemonList.map(({name, url}) => {
+    const newPokemonList: SinglePokemon[] = pokemonList.map(({ name, url }) => {
       //* Split the url to get the id
       const urlParts = url.split('/');
 

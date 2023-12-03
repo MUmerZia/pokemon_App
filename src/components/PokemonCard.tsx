@@ -5,22 +5,23 @@ import {
   Dimensions,
   Text,
   Image,
+  Platform
 } from 'react-native';
 import React from 'react';
 //* Background color card
 import ImageColors from 'react-native-image-colors';
-import {SinglePokemon} from '../interfaces/pokemonInterfaces';
-import {FadeInImage} from './FadeInImage';
-import {useState, useEffect, useRef} from 'react';
-import {useNavigation} from '@react-navigation/native';
+import { SinglePokemon } from '../interfaces/pokemonInterfaces';
+import { FadeInImage } from './FadeInImage';
+import { useState, useEffect, useRef } from 'react';
+import { useNavigation } from '@react-navigation/native';
 
-const windowWidth = Dimensions.get('window').width;
+const windowWidth = Dimensions.get('window').width - 25;
 
 interface Props {
   pokemon: SinglePokemon;
 }
 
-export const PokemonCard = ({pokemon}: Props) => {
+export const PokemonCard = ({ pokemon }: Props) => {
   //* Background color card
   const [bgColor, setBgColor] = useState('grey');
 
@@ -32,7 +33,7 @@ export const PokemonCard = ({pokemon}: Props) => {
 
   //* Background color card
   useEffect(() => {
-    ImageColors.getColors(pokemon.picture, {fallback: 'grey'}).then(colors => {
+    ImageColors.getColors(pokemon.picture, { fallback: 'grey' }).then(colors => {
       //* Problema con la actualizacion del estado
       if (!isMounted.current) return;
 
@@ -50,10 +51,9 @@ export const PokemonCard = ({pokemon}: Props) => {
     };
   }, []);
 
+
   return (
-    <TouchableOpacity
-      activeOpacity={0.8}
-      /* Send the info about the pokemon */
+    <TouchableOpacity activeOpacity={0.8}
       onPress={() =>
         navigation.navigate('PokemonScreen', {
           singlePokemon: pokemon,
@@ -63,7 +63,7 @@ export const PokemonCard = ({pokemon}: Props) => {
       <View
         style={{
           ...styles.cardContainer,
-          width: windowWidth * 0.4,
+          width: Platform.OS === 'ios' ? windowWidth * 0.3 : windowWidth * 0.4,
           backgroundColor: bgColor,
         }}>
         {/* Nombre pokemon y ID */}
@@ -89,7 +89,7 @@ export const PokemonCard = ({pokemon}: Props) => {
 const styles = StyleSheet.create({
   cardContainer: {
     marginHorizontal: 10,
-    height: 120,
+    height: 70,
     // width: 110,
     marginBottom: 25,
     borderRadius: 10,
@@ -111,15 +111,15 @@ const styles = StyleSheet.create({
     left: 10,
   },
   pokebola: {
-    width: 100,
-    height: 100,
+    width: 20,
+    height: 20,
     position: 'absolute',
     right: -25,
     bottom: -25,
   },
   pokemonImage: {
-    width: 120,
-    height: 120,
+    width: 80,
+    height: 80,
     position: 'absolute',
     right: -5,
     bottom: -5,

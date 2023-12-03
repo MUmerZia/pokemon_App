@@ -1,6 +1,6 @@
-import {useEffect, useState} from 'react';
-import {PokemonFull} from '../interfaces/pokemonInterfaces';
-import {pokemonApi} from '../api/pokemonApi';
+import { useEffect, useState } from 'react';
+import { PokemonFull } from '../interfaces/pokemonInterfaces';
+import { pokemonApi } from '../api/pokemonApi';
 
 export const usePokemon = (id: string) => {
   const [isLoading, setIsLoading] = useState(true);
