@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   cardContainer: {
     marginHorizontal: 10,
     height: 120,
-    width: 160,
+    // width: 110,
     marginBottom: 25,
     borderRadius: 10,
     shadowColor: '#000',

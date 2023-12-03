@@ -28,7 +28,7 @@ export const HomeScreen = () => {
           data={simplePokemonList}
           keyExtractor={pokemon => pokemon.id}
           showsVerticalScrollIndicator={false}
-          numColumns={2}
+          numColumns={3}
           ListHeaderComponent={
             <Text
               style={{

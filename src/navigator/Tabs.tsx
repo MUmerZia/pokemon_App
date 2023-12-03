@@ -44,7 +44,7 @@ export const Tabs = () => {
         options={{
           tabBarLabel: 'Listado',
           tabBarIcon: ({color}) => (
-            <Icon name="list-outline" color={color} size={25} />
+            <Icon name="heart-outline" color={color} size={25} />
           ),
         }}
       />

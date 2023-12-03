@@ -14,6 +14,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {FadeInImage} from '../components/FadeInImage';
 import {usePokemon} from '../hooks/usePokemon';
 import {PokemonDetail} from '../components/PokemonDetail';
+import FavoriteScreen from './FavoriteScreen';
 
 //* Con el argumento de tipo podemos recibir los argumentos que se envian desde el componente Navigator
 interface Props extends StackScreenProps<RootStackParams, 'PokemonScreen'> {}
@@ -32,14 +33,28 @@ export const PokemonScreen = ({navigation, route}: Props) => {
   return (
     <View style={{flex: 1}}>
       {/* Header Container */}
-      <View style={{...styles.headerContainer, backgroundColor: color}}>
         {/* Go back arrow */}
+      <View
+       style={{...styles.headerContainer, backgroundColor: color}}
+      >
+
+        <View style={{flexDirection:'row',justifyContent:'space-between',marginHorizontal:22}}>
+
         <TouchableOpacity
           activeOpacity={0.8}
-          style={{...styles.backButton, top: top + 5}}
+          // style={{...styles.backButton, top: top + 5}}
           onPress={() => navigation.pop()}>
           <Icon name="arrow-back-outline" color="white" size={35} />
         </TouchableOpacity>
+
+        <TouchableOpacity
+          activeOpacity={0.8}
+          // style={{...styles.backButton, top: top + 5}}
+          onPress={() => navigation.navigate(FavoriteScreen)}>
+          <Icon name="heart-outline" color="white" size={35} />
+        </TouchableOpacity>
+
+        </View>
         {/* Nombre del Pokemon */}
         <Text style={{...styles.pokemonName, top: top + 40}}>
           {name + '\n'} #{id}
@@ -67,7 +82,7 @@ const styles = StyleSheet.create({
   headerContainer: {
     height: 370,
     zIndex: 999,
-    alignItems: 'center',
+    // alignItems: 'center',
     borderBottomRightRadius: 1000,
     borderBottomLeftRadius: 1000,
   },
